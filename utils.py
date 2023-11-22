@@ -9,13 +9,14 @@ def load_candidates_from_json(filename: str) -> list[Candidate]:
         data = json.load(file)
 
     for item in data:
-        id_ = item['id']
+        id = item['id']
+        name = item['name']
         picture = item['picture']
         position = item['position']
         gender = item['gender']
         age = item['age']
         skills = item['skills']
-        arr.append(Candidate(id_, picture, position, gender, age, skills))
+        arr.append(Candidate(id, name, picture, position, gender, age, skills))
     return arr
 
 
@@ -30,7 +31,7 @@ def get_candidates_by_name(candidate_name: str, arr: list[Candidate]) -> list[Ca
     ret_arr = []
 
     for item in arr:
-        if candidate_name in item.name:
+        if candidate_name.lower() in item.name.lower():
             ret_arr.append(item)
     return ret_arr
 
@@ -39,7 +40,6 @@ def get_candidates_by_skill(skill_name: str, arr: list[Candidate]) -> list[Candi
     ret_arr = []
 
     for item in arr:
-        if skill_name in item.skills:
+        if skill_name.lower() in item.skills.lower():
             ret_arr.append(item)
     return ret_arr
-
